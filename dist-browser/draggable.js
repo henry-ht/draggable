@@ -117,6 +117,7 @@ var Draggable = /** @class */ (function () {
                             var elementChild = element.children[keyChild];
                             if (elementChild.id == id) {
                                 element.children.splice(parseInt(keyChild), 1);
+                                this._tree[key].children = element.children;
                                 break;
                             }
                         }
@@ -124,6 +125,7 @@ var Draggable = /** @class */ (function () {
                 }
             }
             elementDelete.remove();
+            return true;
         }
         return false;
     };
@@ -151,10 +153,11 @@ var Draggable = /** @class */ (function () {
                 }
                 return item;
             });
+            this._tree = newOrder;
+            this.success({
+                order: newOrder
+            });
         }
-        this.success({
-            order: this._tree
-        });
     };
     Draggable.prototype._itemsListener = function (items) {
         var _this = this;
@@ -204,14 +207,18 @@ var Draggable = /** @class */ (function () {
         }
     };
     Draggable.prototype._onDrop = function (e) {
-        var _a, _b;
+        var _this = this;
+        var _a;
         if (e.target instanceof HTMLLIElement) {
             e.target.classList.remove('im-draggable-selected');
-            var id = e.dataTransfer.getData('text/plain');
-            var draggable = document.getElementById(id);
+            var id_1 = e.dataTransfer.getData('text/plain');
+            var draggable = document.getElementById(id_1);
             var parent_1 = e.target.parentNode;
             parent_1.insertBefore(draggable, (_a = e.target.nextSibling) !== null && _a !== void 0 ? _a : e.target);
-            this.reOrder(parent_1, (_b = e.target.nextSibling) !== null && _b !== void 0 ? _b : e.target, id);
+            setTimeout(function () {
+                var _a;
+                _this.reOrder(parent_1, (_a = e.target.nextSibling) !== null && _a !== void 0 ? _a : e.target, id_1);
+            }, 50);
         }
     };
     Draggable.prototype._createElement = function (tagName, attrs) {

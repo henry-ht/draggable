@@ -87,6 +87,7 @@ export default class Draggable  {
                             const elementChild = element.children[keyChild];
                             if(elementChild.id == id){
                                 element.children.splice(parseInt(keyChild), 1);
+                                this._tree[key].children = element.children;
                                 break;
                             }
                         }
@@ -122,11 +123,11 @@ export default class Draggable  {
                 }
                 return item as unknown as ItemInterface;
             });
+            this._tree = newOrder;
+            this.success({
+                order: newOrder
+            });
         }
-
-        this.success({
-            order: this._tree
-        });
     }
 
     _itemsListener(items:HTMLElement[]) {
@@ -190,7 +191,9 @@ export default class Draggable  {
             const draggable = document.getElementById(id);
             const parent = e.target.parentNode;
             parent.insertBefore(draggable, e.target.nextSibling ?? e.target);
-            this.reOrder(parent, e.target.nextSibling ?? e.target, id);
+            setTimeout(() => {
+                this.reOrder(parent, e.target.nextSibling ?? e.target, id);
+            }, 50);
         }
     }
 
