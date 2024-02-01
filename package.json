@@ -1,0 +1,29 @@
+{
+  "name": "@henryht/draggable",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist-node/draggable.js",
+  "browser": "dist-browser/draggable.js",
+  "type": "module",
+  "scripts": {
+    "build-browser": "tsc src/draggable.ts --outDir dist-browser --module ES6",
+    "build-node": "tsc src/draggable.ts --outDir dist-node",
+    "build": "npm run build-browser & npm run build-node"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/henry-ht/draggable.git"
+  },
+  "keywords": [
+    "draggable"
+  ],
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  },
+  "author": "Henry Torres",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/henry-ht/draggable/issues"
+  },
+  "homepage": "https://github.com/henry-ht/draggable#readme"
+}
