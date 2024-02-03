@@ -43,3 +43,11 @@
 #container-draggable li.im-draggable-selected > .border-draggable {
     display: block !important;
 }
+
+#container-draggable button.loading span {
+    display: block !important;
+}
+
+#container-draggable button.loading i {
+    display: none !important;
+}

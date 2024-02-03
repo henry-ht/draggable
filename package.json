@@ -1,6 +1,6 @@
 {
   "name": "@henryht/draggable",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "dist-node/draggable.js",
   "browser": "dist-browser/draggable.js",

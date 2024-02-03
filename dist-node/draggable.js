@@ -230,6 +230,13 @@ var Draggable = /** @class */ (function () {
         }
         return element;
     };
+    Draggable.prototype._preloading = function () {
+        return this._createElement("span", {
+            "class": "spinner-border spinner-border-sm text-light me-1 d-none text-dark",
+            "role": "status",
+            "aria-hidden": "true"
+        });
+    };
     Draggable.prototype._treview = function (items, containerDraggable, child, parentId) {
         if (child === void 0) { child = false; }
         if (parentId === void 0) { parentId = 0; }
@@ -276,6 +283,7 @@ var Draggable = /** @class */ (function () {
                                     "class": "fa-regular fa-trash-can",
                                 });
                                 btnTrash.append(btnTrashIcon);
+                                btnTrash.append(_this._preloading());
                                 btnTrash.addEventListener('click', _this._clickOption.bind(_this, item, "trash"), false);
                                 var btnEdit = _this._createElement("button", {
                                     "class": "btn btn-light btn-sm",
@@ -284,6 +292,7 @@ var Draggable = /** @class */ (function () {
                                     "class": "fa-regular fa-pen-to-square",
                                 });
                                 btnEdit.append(btnEditIcon);
+                                btnEdit.append(_this._preloading());
                                 btnEdit.addEventListener('click', _this._clickOption.bind(_this, item, "edit"), false);
                                 btnGroup.append(btnDraggable);
                                 btnGroup.append(btnCollapse);

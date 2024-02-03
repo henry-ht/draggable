@@ -205,6 +205,14 @@ export default class Draggable  {
         return element;
     }
 
+    _preloading(): HTMLElement{
+        return this._createElement("span", {
+            "class": "spinner-border spinner-border-sm text-light me-1 d-none text-dark",
+            "role": "status",
+            "aria-hidden": "true"
+        });
+    }
+
     async _treview (items:ItemInterface[], containerDraggable:HTMLElement, child:boolean = false, parentId:number = 0) {
         let ulData:{[key:string]: (string|number)} = {
             "class": (child ? "list-group list-group-flush small" : "list-group")
@@ -247,6 +255,7 @@ export default class Draggable  {
                 "class": "fa-regular fa-trash-can",
             });
             btnTrash.append(btnTrashIcon);
+            btnTrash.append(this._preloading());
             btnTrash.addEventListener('click', this._clickOption.bind(this, item, "trash"), false);
 
             const btnEdit: HTMLElement = this._createElement("button", {
@@ -256,6 +265,7 @@ export default class Draggable  {
                 "class": "fa-regular fa-pen-to-square",
             });
             btnEdit.append(btnEditIcon);
+            btnEdit.append(this._preloading());
             btnEdit.addEventListener('click', this._clickOption.bind(this, item, "edit"), false);
 
             btnGroup.append(btnDraggable);
