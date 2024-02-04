@@ -104,7 +104,7 @@ var Draggable = /** @class */ (function () {
             type: type
         });
     };
-    Draggable.prototype.clean = function () {
+    Draggable.prototype.clearContent = function () {
         this._parent.innerHTML = "";
     };
     Draggable.prototype.delete = function (id) {

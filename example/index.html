@@ -266,6 +266,7 @@
             }
 
             drag.success = function (data) {
+                drag.clean()
                 console.log("urraa success: ", data)
                 console.log("class: ", drag.getOrder());
             }

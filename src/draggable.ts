@@ -71,8 +71,8 @@ export default class Draggable  {
             type: type
         });
     }
-    
-    clean(){
+
+    clearContent(){
         this._parent!.innerHTML = "";
     }
 
