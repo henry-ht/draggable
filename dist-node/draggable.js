@@ -73,6 +73,7 @@ var Draggable = /** @class */ (function () {
         this.success = function (data) { };
         this.actions = function (data) { };
         this._boxes = [];
+        this._treeComplete = [];
         this._items = [];
         this._parent = utils.el('#container-draggable');
         this._tree = tree;
@@ -91,10 +92,20 @@ var Draggable = /** @class */ (function () {
                         this._items = utils.elements('#container-draggable li button.btn-draggable-move');
                         this._itemsListener(this._items);
                         this._boxesListener(this._box);
+                        this._allItems();
                         _a.label = 2;
                     case 2: return [2 /*return*/, true];
                 }
             });
+        });
+    };
+    Draggable.prototype._allItems = function () {
+        var _this = this;
+        this._tree.forEach(function (element) {
+            element.children.forEach(function (element2) {
+                _this._treeComplete.push(element2);
+            });
+            _this._treeComplete.push(element);
         });
     };
     Draggable.prototype._clickOption = function (data, type, e) {
@@ -143,10 +154,10 @@ var Draggable = /** @class */ (function () {
         var liChildren = (_a = utils.el('#container-draggable > ul')) === null || _a === void 0 ? void 0 : _a.children;
         if (liChildren instanceof HTMLCollection) {
             var newOrder = Array.prototype.slice.call(liChildren).map(function (child) {
-                var _a, _b;
+                var _a, _b, _c;
                 var id = (_a = child.getAttribute("id")) === null || _a === void 0 ? void 0 : _a.split('-')[1];
-                var item = _this._tree.filter(function (obj) { return obj.id == id; })[0];
-                var children = (_b = child.querySelector("#collapse-" + id + " > ul")) === null || _b === void 0 ? void 0 : _b.children;
+                var item = (_b = _this._tree.filter(function (obj) { return obj.id == id; })[0]) !== null && _b !== void 0 ? _b : _this._treeComplete.filter(function (obj) { return obj.id == id; })[0];
+                var children = (_c = child.querySelector("#collapse-" + id + " > ul")) === null || _c === void 0 ? void 0 : _c.children;
                 if (children instanceof HTMLCollection) {
                     var newChildren = Array.prototype.slice.call(children).map(function (childD) {
                         var _a, _b;

@@ -37,6 +37,7 @@ export default class Draggable  {
     private _parent: Element | null;
     private _tree: ItemInterface[];
     private _boxes: HTMLElement[] | NodeListOf<Element> = [];
+    private _treeComplete:ItemInterface[] = [];
     private _box: HTMLElement;
     private _items: HTMLElement[] | NodeListOf<Element> = [];
     /**
@@ -60,8 +61,19 @@ export default class Draggable  {
             
             this._itemsListener(this._items);
             this._boxesListener(this._box);
+            this._allItems();
         }
         return true;
+    }
+
+    _allItems(){
+        this._tree.forEach(element => {
+            element.children.forEach(element2 => {
+                this._treeComplete.push(element2);
+            });
+            this._treeComplete.push(element);
+        });
+        
     }
 
     _clickOption(data:object, type:string, e){
@@ -110,10 +122,11 @@ export default class Draggable  {
 
     reOrder(parent:HTMLElement, before:HTMLElement, elementId:string):void{
         const liChildren:HTMLCollection | undefined = utils.el('#container-draggable > ul')?.children;
+        
         if(liChildren instanceof HTMLCollection){
             const newOrder = Array.prototype.slice.call(liChildren).map((child)=>{
                 const id = child.getAttribute("id")?.split('-')[1];
-                const item = this._tree.filter((obj) => obj.id == id)[0];
+                const item = this._tree.filter((obj) => obj.id == id)[0] ?? this._treeComplete.filter((obj) => obj.id == id)[0];
                 
                 const children = child.querySelector("#collapse-"+id+" > ul")?.children;
                 if(children instanceof HTMLCollection){
