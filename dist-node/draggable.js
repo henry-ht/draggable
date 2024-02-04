@@ -104,6 +104,9 @@ var Draggable = /** @class */ (function () {
             type: type
         });
     };
+    Draggable.prototype.clean = function () {
+        this._parent.innerHTML = "";
+    };
     Draggable.prototype.delete = function (id) {
         var elementDelete = utils.el('#draggable-' + id);
         if (elementDelete instanceof Element) {

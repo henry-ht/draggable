@@ -71,6 +71,10 @@ export default class Draggable  {
             type: type
         });
     }
+    
+    clean(){
+        this._parent!.innerHTML = "";
+    }
 
     delete(id:number):boolean{
         const elementDelete = utils.el('#draggable-'+id);
